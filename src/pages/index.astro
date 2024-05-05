@@ -1,12 +1,13 @@
 ---
-import '@/styles/globals.css'
+import "@/styles/globals.css";
+
+import Layout from "@/layouts/Layout.astro";
+
+import { Button } from "@/ui/button";
+import { Input } from "@/ui/input";
 ---
 
-<html lang="en">
-	<head>
-		<title>Astro</title>
-	</head>
-	<body>
-		hola
-	</body>
-</html>
+<Layout title="Welcome to Astro.">
+  <Input />
+  <Button>Button</Button>
+</Layout>
