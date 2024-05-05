@@ -9,7 +9,35 @@ import { CopyIcon } from "@/icons/CopyIcon";
 import { UserButton } from "@/components/UserButton";
 
 import { getSession } from "auth-astro/server";
+
+import { db } from "astro:db";
+import { User } from "astro:db";
+import { like } from "astro:db";
+
 const session = await getSession(Astro.request);
+
+// user exists?
+if (
+  !(
+    session === null ||
+    session.user?.email === null ||
+    session.user?.email === undefined ||
+    session.user?.name === null ||
+    session.user?.name === undefined
+  )
+) {
+  const userExists = await db
+    .select()
+    .from(User)
+    .where(like(User.email, session.user.email));
+  console.log("🚀 ~ userExists:", userExists);
+
+  if (userExists.length === 0) {
+    db.insert(User)
+      .values({ name: session.user.name, email: session.user.email })
+      .execute();
+  }
+}
 ---
 
 <main
@@ -17,10 +45,8 @@ const session = await getSession(Astro.request);
 >
   <div class="w-full max-w-md space-y-6">
     <div class="flex items-center justify-between">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
-          URL Shortener
-        </h1>
+      <div class="text-start">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Shortly</h1>
         <p class="mt-2 text-gray-500 dark:text-gray-400">
           Shorten your long URLs with ease.
         </p>
