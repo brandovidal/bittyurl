@@ -1,40 +1,9 @@
 ---
-import "@/styles/globals.css";
-
 import Layout from "@/layouts/Layout.astro";
 
-import { Button } from "@/ui/button";
-
-import { getSession } from "auth-astro/server";
-
-const session = await getSession(Astro.request);
-console.log("🚀 ~ session:", session);
+import Home from "@/views/Home.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-  {
-    session !== null && session.user ? (
-      <p>Welcome, {session.user.email}!</p>
-    ) : (
-      <p>Please login to see your profile.</p>
-    )
-  }
-
-  <Button id="login">Login</Button>
-  <Button id="logout">Logout</Button>
-
-  <script>
-    const loginButton = document.querySelector<HTMLButtonElement>("#login");
-    const logoutButton = document.querySelector<HTMLButtonElement>("#logout");
-
-    const { signIn, signOut } = await import("auth-astro/client");
-
-    if (loginButton) {
-      loginButton.onclick = () => signIn("google");
-    }
-
-    if (logoutButton) {
-      logoutButton.onclick = () => signOut();
-    }
-  </script>
+<Layout title="Shortly">
+  <Home />
 </Layout>

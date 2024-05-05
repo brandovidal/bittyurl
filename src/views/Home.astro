@@ -1,0 +1,61 @@
+---
+import { Button } from "@/ui/button";
+import { Input } from "@/ui/input";
+import { CardContent, Card } from "@/ui/card";
+
+import { LinkIcon } from "@/icons/LinkIcon";
+import { CopyIcon } from "@/icons/CopyIcon";
+
+import { UserButton } from "@/components/UserButton";
+
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
+---
+
+<main
+  class="flex min-h-[100dvh] items-center justify-center bg-gray-100 px-4 dark:bg-gray-950"
+>
+  <div class="w-full max-w-md space-y-6">
+    <div class="flex items-center justify-between">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          URL Shortener
+        </h1>
+        <p class="mt-2 text-gray-500 dark:text-gray-400">
+          Shorten your long URLs with ease.
+        </p>
+      </div>
+      <UserButton session={session} client:load />
+    </div>
+    <Card>
+      <CardContent className="space-y-4">
+        <form class="flex items-center space-x-2">
+          <Input
+            className="flex-1"
+            placeholder="Enter your long URL"
+            type="url"
+          />
+          <Button type="submit">
+            <LinkIcon className="h-5 w-5 mr-2" />
+            Shorten
+          </Button>
+        </form>
+        <div
+          class="flex items-center justify-between rounded-md bg-white px-4 py-3 shadow-sm dark:bg-gray-800"
+        >
+          <p class="text-sm font-medium text-gray-900 dark:text-gray-50">
+            https://example.com/abc123
+          </p>
+          <Button
+            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+            size="icon"
+            variant="ghost"
+          >
+            <CopyIcon className="h-5 w-5" />
+            <span class="sr-only">Copy link</span>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+</main>
