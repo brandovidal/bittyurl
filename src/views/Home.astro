@@ -1,6 +1,8 @@
 ---
 import { CardContent, Card } from "@/ui/card";
 
+import type { UserProps } from '@/interfaces/User'
+
 import { UserButton } from "@/components/UserButton";
 import { CreateLink } from "@/components/CreateLink";
 import { ItemLink } from "@/components/ItemLink";
@@ -12,6 +14,8 @@ import { User } from "astro:db";
 import { like } from "astro:db";
 
 const session = await getSession(Astro.request);
+
+let user: UserProps | null = null;
 
 // user exists?
 if (
@@ -33,6 +37,8 @@ if (
       .values({ name: session.user.name, email: session.user.email })
       .execute();
   }
+
+  user = userExists[0];
 }
 ---
 
@@ -51,7 +57,7 @@ if (
     </div>
     <Card>
       <CardContent className="space-y-4">
-        <CreateLink client:load />
+        <CreateLink user={user} client:load />
         <ItemLink />
       </CardContent>
     </Card>

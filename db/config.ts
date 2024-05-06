@@ -12,7 +12,10 @@ const Link = defineTable({
   columns: {
     url: column.text(),
     slug: column.text({ unique: true }),
-    userId: column.number({ references: () => User.columns.id })
+    userId: column.number({
+      optional: true,
+      references: () => User.columns.id
+    })
   }
 })
 

@@ -1,6 +1,8 @@
 import { LinkIcon } from '@/icons/LinkIcon'
 import { RefreshIcon } from '@/icons/RefreshIcon'
 
+import type { UserProps } from '@/interfaces/User'
+
 import { object, string } from 'zod'
 import type { TypeOf } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -33,14 +35,37 @@ const defaultValues = {
   slug: ''
 }
 
-export function CreateLink () {
+interface Props {
+  user: UserProps | null
+}
+
+export function CreateLink ({ user }: Props) {
   const form = useForm<formInput>({
     resolver: zodResolver(formSchema),
     defaultValues
   })
 
-  function onSubmit (values: formInput) {
-    console.log({ values })
+  async function onSubmit (values: formInput) {
+    const inputData = { ...values, userId: user?.id }
+    console.log({ inputData })
+
+    // TODO: Add API call
+    try {
+      const response = await fetch('/api/shorten-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(inputData)
+      })
+      const data = await response.json()
+      console.log({ data })
+
+      form.reset()
+      // TODO: Add toast
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   function randomizeSlug () {
