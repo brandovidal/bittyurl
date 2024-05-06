@@ -14,6 +14,7 @@ import { User } from "astro:db";
 import { like } from "astro:db";
 
 const session = await getSession(Astro.request);
+console.log("🚀 ~ session:", session)
 
 let user: UserProps | null = null;
 
@@ -21,6 +22,9 @@ let user: UserProps | null = null;
 if (
   !(
     session === null ||
+    session === undefined ||
+    session.user === null ||
+    session.user === undefined ||
     session.user?.email === null ||
     session.user?.email === undefined ||
     session.user?.name === null ||

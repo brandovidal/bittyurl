@@ -11,6 +11,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/ui/form'
+import { Toaster, toast } from 'sonner'
+
+import JSConfetti from 'js-confetti'
 
 const formSchema = object({
   url: string({
@@ -40,6 +43,15 @@ interface Props {
 }
 
 export function CreateLink ({ user }: Props) {
+  const generateConfetti = async () => {
+    const jsConfetti = new JSConfetti()
+    await jsConfetti.addConfetti({
+      confettiColors: ['#fdd835', '#4caf50', '#2196f3', '#f44336', '#ff9800'],
+      confettiRadius: 3,
+      confettiNumber: 50
+    })
+  }
+
   const form = useForm<formInput>({
     resolver: zodResolver(formSchema),
     defaultValues
@@ -49,7 +61,6 @@ export function CreateLink ({ user }: Props) {
     const inputData = { ...values, userId: user?.id }
     console.log({ inputData })
 
-    // TODO: Add API call
     try {
       const response = await fetch('/api/shorten-url', {
         method: 'POST',
@@ -61,10 +72,20 @@ export function CreateLink ({ user }: Props) {
       const data = await response.json()
       console.log({ data })
 
-      form.reset()
-      // TODO: Add toast
+      if (data.success) {
+        form.reset()
+        console.log('[Success]: ', data)
+        generateConfetti()
+        toast('Link created.')
+        return
+      }
+
+      console.log('[Error]: ', data)
+      toast.error('Link has been created.')
     } catch (err) {
-      console.error(err)
+      console.error('[Error]: ', err)
+
+      toast.error('Link has been created.')
     }
   }
 
