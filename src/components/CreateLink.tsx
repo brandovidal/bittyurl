@@ -1,4 +1,5 @@
 import { LinkIcon } from '@/icons/LinkIcon'
+import { RefreshIcon } from '@/icons/RefreshIcon'
 
 import { object, string } from 'zod'
 import type { TypeOf } from 'zod'
@@ -21,16 +22,8 @@ const formSchema = object({
     invalid_type_error: 'Slug must be a string'
   })
     .trim()
+    .min(3, 'Slug must be at least 3 characters')
     .max(20, 'Slug must be at most 20 characters')
-    .nullish()
-}).transform(data => {
-  const { url } = data
-
-  // TODO: : generate randomize slug
-  const slug = Math.random().toString(36).slice(2)
-  console.log('🚀 ~ slug:', slug)
-
-  return { ...data, slug }
 })
 
 type formInput = TypeOf<typeof formSchema>
@@ -50,10 +43,15 @@ export function CreateLink () {
     console.log({ values })
   }
 
+  function randomizeSlug () {
+    form.setValue('slug', Math.random().toString(36).slice(2))
+    form.trigger('slug')
+  }
+
   return (
     <Form {...form}>
       <form
-        className='flex items-start space-x-2'
+        className='grid grid-cols-1 gap-4'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -67,6 +65,36 @@ export function CreateLink () {
                   autoComplete='off'
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='slug'
+          render={({ field }) => (
+            <FormItem className='relative'>
+              <FormControl>
+                <div className='relative'>
+                  <Input
+                    className='pr-10'
+                    placeholder='Generate slug'
+                    type='text'
+                    autoComplete='off'
+                    {...field}
+                  />
+                  <Button
+                    className='absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
+                    size='icon'
+                    variant='ghost'
+                    type='button'
+                    onClick={randomizeSlug}
+                  >
+                    <RefreshIcon className='h-5 w-5' />
+                    <span className='sr-only'>Generate slug</span>
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
