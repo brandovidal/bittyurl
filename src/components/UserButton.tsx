@@ -18,7 +18,6 @@ interface Props {
 }
 
 export function UserButton ({ session }: Props) {
-  console.log("🚀 ~ UserButton ~ session:", session)
   const login = () => {
     signIn('google')
   }
