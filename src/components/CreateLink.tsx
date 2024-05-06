@@ -13,13 +13,24 @@ const formSchema = object({
   url: string({
     required_error: 'URL is required',
     invalid_type_error: 'URL must be a string'
-  }).url({ message: 'Invalid URL' }),
+  })
+    .trim()
+    .url({ message: 'Invalid URL' }),
   slug: string({
     required_error: 'Slug is required',
     invalid_type_error: 'Slug must be a string'
   })
-    .min(3, 'Slug must be at least 3 characters')
+    .trim()
     .max(20, 'Slug must be at most 20 characters')
+    .nullish()
+}).transform(data => {
+  const { url } = data
+
+  // TODO: : generate randomize slug
+  const slug = Math.random().toString(36).slice(2)
+  console.log('🚀 ~ slug:', slug)
+
+  return { ...data, slug }
 })
 
 type formInput = TypeOf<typeof formSchema>
@@ -36,13 +47,13 @@ export function CreateLink () {
   })
 
   function onSubmit (values: formInput) {
-    console.log(values)
+    console.log({ values })
   }
 
   return (
     <Form {...form}>
       <form
-        className='flex items-center space-x-2'
+        className='flex items-start space-x-2'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -53,7 +64,7 @@ export function CreateLink () {
               <FormControl>
                 <Input
                   placeholder='Enter your long URL'
-                  type='url'
+                  autoComplete='off'
                   {...field}
                 />
               </FormControl>
