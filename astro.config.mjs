@@ -16,5 +16,10 @@ export default defineConfig({
     db()
   ],
   output: 'server',
-  adapter: cloudflare()
+  adapter: cloudflare(),
+  vite: {
+    ssr: {
+      external: ['node:buffer', 'node:path']
+    }
+  }
 })
