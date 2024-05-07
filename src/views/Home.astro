@@ -1,20 +1,17 @@
 ---
 import { CardContent, Card } from "@/ui/card";
 
-import type { UserProps } from '@/interfaces/User'
+import type { UserProps } from "@/interfaces/User";
 
 import { UserButton } from "@/components/UserButton";
 import { CreateLink } from "@/components/CreateLink";
-import { ItemLink } from "@/components/ItemLink";
+import { ShorterLink } from "@/components/ShorterLink";
 
 import { getSession } from "auth-astro/server";
 
-import { db } from "astro:db";
-import { User } from "astro:db";
-import { like } from "astro:db";
+import { getUserByEmail, createUser } from "@/SHared/db";
 
 const session = await getSession(Astro.request);
-// console.log("🚀 ~ session:", session)
 
 let user: UserProps | null = null;
 
@@ -31,18 +28,13 @@ if (
     session.user?.name === undefined
   )
 ) {
-  const userExists = await db
-    .select()
-    .from(User)
-    .where(like(User.email, session.user.email));
+  const userExists = await getUserByEmail(session.user.email);
 
-  if (userExists.length === 0) {
-    db.insert(User)
-      .values({ name: session.user.name, email: session.user.email })
-      .execute();
+  if (userExists.success && userExists.data === null) {
+    await createUser({ name: session.user.name, email: session.user.email })
   }
 
-  user = userExists[0];
+  user = userExists.data!;
 }
 ---
 
@@ -52,7 +44,7 @@ if (
   <div class="w-full max-w-md space-y-6">
     <div class="flex items-center justify-between">
       <div class="text-start">
-        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Shortly</h1>
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Linkflare</h1>
         <p class="mt-2 text-gray-500 dark:text-gray-400">
           Shorten your long URLs with ease.
         </p>
@@ -62,7 +54,7 @@ if (
     <Card>
       <CardContent className="space-y-4">
         <CreateLink user={user} client:load />
-        <ItemLink />
+        <ShorterLink client:load />
       </CardContent>
     </Card>
   </div>

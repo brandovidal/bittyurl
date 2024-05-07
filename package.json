@@ -1,5 +1,5 @@
 {
-  "name": "shortly",
+  "name": "linkflare",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
+    "@astrojs/cloudflare": "^10.2.5",
     "@astrojs/db": "0.11.0",
     "@astrojs/node": "8.2.5",
     "@astrojs/react": "3.3.2",
@@ -39,6 +40,7 @@
     "tailwindcss": "3.4.3",
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.4.5",
-    "zod": "3.23.6"
+    "zod": "3.23.6",
+    "zustand": "4.5.2"
   }
 }
