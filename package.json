@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "wrangler types && astro dev",
-    "build": "wrangler types && astro check && astro build --remote",
+    "build": "wrangler types && astro check && ASTRO_STUDIO_APP_TOKEN=3d2703b98039d2a1607b88c2e4bdf3b3f53c1027:gbaijob5tylgihz2ufu359fb3ud1:gbaijob5tylgihz2ufu359fb3ud1 astro build --remote",
     "preview": "wrangler types && astro preview --remote",
     "start": "wrangler types && wrangler pages dev ./dist",
     "astro": "astro"
