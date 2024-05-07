@@ -44,12 +44,6 @@ importers:
       '@radix-ui/react-slot':
         specifier: 1.0.2
         version: 1.0.2(@types/react@18.3.1)(react@18.3.1)
-      '@types/react':
-        specifier: 18.3.1
-        version: 18.3.1
-      '@types/react-dom':
-        specifier: 18.3.0
-        version: 18.3.0
       astro:
         specifier: 4.7.1
         version: 4.7.1(@types/node@20.12.8)(typescript@5.4.5)
@@ -101,6 +95,16 @@ importers:
       zustand:
         specifier: 4.5.2
         version: 4.5.2(@types/react@18.3.1)(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: 18.3.1
+        version: 18.3.1
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      wrangler:
+        specifier: 3.53.1
+        version: 3.53.1(@cloudflare/workers-types@4.20240502.0)
 
 packages:
 

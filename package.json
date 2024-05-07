@@ -23,8 +23,6 @@
     "@radix-ui/react-dropdown-menu": "2.0.6",
     "@radix-ui/react-label": "2.0.2",
     "@radix-ui/react-slot": "1.0.2",
-    "@types/react": "18.3.1",
-    "@types/react-dom": "18.3.0",
     "astro": "4.7.1",
     "auth-astro": "4.1.1",
     "class-variance-authority": "0.7.0",
@@ -42,5 +40,10 @@
     "typescript": "5.4.5",
     "zod": "3.23.6",
     "zustand": "4.5.2"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.0",
+    "wrangler": "3.53.1"
   }
 }
