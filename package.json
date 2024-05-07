@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --remote",
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build --remote",
     "preview": "astro preview --remote",
-    "server": "wrangler pages dev ./dist",
+    "serve": "wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {

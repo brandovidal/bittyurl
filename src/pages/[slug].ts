@@ -1,4 +1,4 @@
-import { getLinkBySlug } from '@/SHared/db'
+import { getLinkBySlug } from '@/Shared/db'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async ({ params }) => {

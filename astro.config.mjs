@@ -16,10 +16,14 @@ export default defineConfig({
     db()
   ],
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    }
+  }),
   vite: {
     ssr: {
-      external: ['node:buffer', 'node:path']
+      external: ['node:buffer', 'node:path', 'url']
     }
   }
 })
