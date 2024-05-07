@@ -16,6 +16,7 @@ import { Toaster } from '@/ui/sonner'
 import { toast } from 'sonner'
 
 import JSConfetti from 'js-confetti'
+import { useLinkStore } from '@/store/link'
 
 const formSchema = object({
   url: string({
@@ -45,6 +46,9 @@ interface Props {
 }
 
 export function CreateLink ({ user }: Props) {
+  const store = useLinkStore(state => state.store)
+  const clean = useLinkStore(state => state.clean)
+
   const generateConfetti = async () => {
     const jsConfetti = new JSConfetti()
     await jsConfetti.addConfetti({
@@ -60,44 +64,54 @@ export function CreateLink ({ user }: Props) {
   })
 
   async function onSubmit (values: formInput) {
+    clean()
+
     const inputData = { ...values, userId: user?.id }
 
     const toastLoading = toast.loading('Creating link...')
 
     setTimeout(() => {
-      toast.dismiss(toastLoading);
+      toast.dismiss(toastLoading)
+      store(inputData)
     }, 3000)
 
-    try {
-      const response = await fetch('/api/shorten-url', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inputData)
-      })
-      const data = await response.json()
+    // try {
+    //   const response = await fetch('/api/shorten-url', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(inputData)
+    //   })
+    //   const data = await response.json()
+    //   toast.dismiss(toastLoading)
 
-      if (data.success) {
-        form.reset()
+    //   if (data.success) {
+    //     form.reset()
 
-        generateConfetti()
-        toast.success('Link has been created.', { description: 'Link has been created.' })
-        return
-      }
+    //     generateConfetti()
+    //     toast.success('Link has been created.', {
+    //       description: 'Link has been created.'
+    //     })
+    //     return
+    //   }
 
-      toast.error('Link not created.', { description: data.error.message ?? 'Link not created.' })
+    //   toast.error('Link not created.', {
+    //     description: data.error.message ?? 'Link not created.'
+    //   })
 
-      if (response.status === 409) {
-        form.setError('slug', { message: 'Slug already exists' })
-        form.setFocus('slug')
-      }
-    } catch (err) {
-      console.error('[Error]: ', err)
-      const message = (err as Error).message
+    //   if (response.status === 409) {
+    //     form.setError('slug', { message: 'Slug already exists' })
+    //     form.setFocus('slug')
+    //   }
+    // } catch (err) {
+    //   console.error('[Error]: ', err)
+    //   const message = (err as Error).message
 
-      toast.error('Link not created.', { description: message ?? 'Link not created.' })
-    }
+    //   toast.error('Link not created.', {
+    //     description: message ?? 'Link not created.'
+    //   })
+    // }
   }
 
   function randomizeSlug () {

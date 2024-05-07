@@ -1,5 +1,5 @@
 export interface LinkProps {
-  userId: number | null
+  userId?: number | null
   url: string
   slug: string
 }

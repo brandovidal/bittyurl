@@ -1,17 +1,19 @@
 ---
 import { CardContent, Card } from "@/ui/card";
 
-import type { UserProps } from '@/interfaces/User'
+import type { UserProps } from "@/interfaces/User";
 
 import { UserButton } from "@/components/UserButton";
 import { CreateLink } from "@/components/CreateLink";
-import { ItemLink } from "@/components/ItemLink";
+import { ShorterLink } from "@/components/ShorterLink";
 
 import { getSession } from "auth-astro/server";
 
 import { db } from "astro:db";
 import { User } from "astro:db";
 import { like } from "astro:db";
+
+import { useLinkStore } from "@/store/link";
 
 const session = await getSession(Astro.request);
 // console.log("🚀 ~ session:", session)
@@ -62,7 +64,7 @@ if (
     <Card>
       <CardContent className="space-y-4">
         <CreateLink user={user} client:load />
-        <ItemLink />
+        <ShorterLink client:load />
       </CardContent>
     </Card>
   </div>
