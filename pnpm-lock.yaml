@@ -102,9 +102,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      vite:
-        specifier: 5.2.11
-        version: 5.2.11(@types/node@20.12.10)
       wrangler:
         specifier: 3.53.1
         version: 3.53.1(@cloudflare/workers-types@4.20240502.0)
