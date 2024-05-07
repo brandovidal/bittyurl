@@ -7,13 +7,13 @@
     "start": "astro dev",
     "build": "astro check && astro build --remote",
     "preview": "astro preview --remote",
+    "server": "wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
     "@astrojs/cloudflare": "^10.2.5",
     "@astrojs/db": "0.11.0",
-    "@astrojs/node": "8.2.5",
     "@astrojs/react": "3.3.2",
     "@astrojs/tailwind": "5.1.0",
     "@auth/core": "0.18.6",
