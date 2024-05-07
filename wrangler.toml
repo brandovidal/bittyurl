@@ -2,3 +2,7 @@
 # Opt into backwards-incompatible changes through April 5, 2022.
 compatibility_date = "2022-04-05"
 compatibility_flags = [ "nodejs_compat" ]
+
+# (in wrangler.toml)
+# Configure the name of the Worker.
+name = "linkflare"
