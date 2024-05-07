@@ -11,7 +11,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/ui/button'
 import { Input } from '@/ui/input'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/ui/form'
-import { Toaster, toast } from 'sonner'
+
+import { Toaster } from '@/ui/sonner'
+import { toast } from 'sonner'
 
 import JSConfetti from 'js-confetti'
 
@@ -59,7 +61,12 @@ export function CreateLink ({ user }: Props) {
 
   async function onSubmit (values: formInput) {
     const inputData = { ...values, userId: user?.id }
-    console.log({ inputData })
+
+    const toastLoading = toast.loading('Creating link...')
+
+    setTimeout(() => {
+      toast.dismiss(toastLoading);
+    }, 3000)
 
     try {
       const response = await fetch('/api/shorten-url', {
@@ -70,22 +77,26 @@ export function CreateLink ({ user }: Props) {
         body: JSON.stringify(inputData)
       })
       const data = await response.json()
-      console.log({ data })
 
       if (data.success) {
         form.reset()
-        console.log('[Success]: ', data)
+
         generateConfetti()
-        toast('Link created.')
+        toast.success('Link has been created.', { description: 'Link has been created.' })
         return
       }
 
-      console.log('[Error]: ', data)
-      toast.error('Link has been created.')
+      toast.error('Link not created.', { description: data.error.message ?? 'Link not created.' })
+
+      if (response.status === 409) {
+        form.setError('slug', { message: 'Slug already exists' })
+        form.setFocus('slug')
+      }
     } catch (err) {
       console.error('[Error]: ', err)
+      const message = (err as Error).message
 
-      toast.error('Link has been created.')
+      toast.error('Link not created.', { description: message ?? 'Link not created.' })
     }
   }
 
@@ -150,6 +161,7 @@ export function CreateLink ({ user }: Props) {
           <LinkIcon className='h-5 w-5 mr-2' />
           Shorten
         </Button>
+        <Toaster richColors />
       </form>
     </Form>
   )

@@ -1,6 +1,4 @@
 ---
-import { Toaster } from '@/ui/sonner';
-
 interface Props {
   title: string;
 }
@@ -20,11 +18,10 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
-    <Toaster />
   </body>
 </html>
 <style is:global>
-	@import "@/styles/globals.css";
+  @import "@/styles/globals.css";
 
   :root {
     --accent: 136, 58, 234;
