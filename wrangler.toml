@@ -6,3 +6,6 @@ compatibility_flags = [ "nodejs_compat" ]
 # (in wrangler.toml)
 # Configure the name of the Worker.
 name = "linkflare"
+
+[vars]
+MY_VARIABLE = "test"
