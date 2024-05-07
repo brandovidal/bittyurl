@@ -16,14 +16,13 @@ export default defineConfig({
     db()
   ],
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    }
-  }),
+  adapter: cloudflare(),
   vite: {
     ssr: {
-      external: ['node:buffer', 'node:path']
+      external: [ 'node:path', 'astro:db']
+    },
+    optimizeDeps: {
+      exclude: ['astro:db']
     }
   }
 })

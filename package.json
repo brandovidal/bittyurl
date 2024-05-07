@@ -3,11 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev  --remote",
-    "start": "astro dev",
-    "build": "astro check && astro build --remote",
-    "preview": "astro preview --remote",
-    "serve": "wrangler pages dev ./dist",
+    "dev": "wrangler types && astro dev",
+    "build": "wrangler types && astro check && astro build --remote",
+    "preview": "wrangler types && astro preview --remote",
+    "start": "wrangler types && wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {

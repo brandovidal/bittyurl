@@ -23,4 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# Cloudflare
 .wrangler.toml
+.dev.vars
