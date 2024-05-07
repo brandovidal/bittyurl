@@ -26,7 +26,7 @@ export function ShorterLink () {
 
     setClassNameClipboard('animate-pulse text-green-600')
 
-    toast.success('Link copied to clipboard.')
+    toast.info('Link copied to clipboard.')
 
     setTimeout(() => {
       setClassNameClipboard('')
