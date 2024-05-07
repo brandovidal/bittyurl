@@ -23,7 +23,7 @@ export default defineConfig({
   }),
   vite: {
     ssr: {
-      external: ['node:buffer', 'node:path', 'url']
+      external: ['node:buffer', 'node:path', '@astrojs/db']
     }
   }
 })
