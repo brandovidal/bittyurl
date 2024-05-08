@@ -20,6 +20,9 @@ export default defineConfig({
   vite: {
     ssr: {
       external: ['node:path', 'node:process']
+    },
+    build: {
+      minify: false,
     }
   }
 })

@@ -1,2 +1,8 @@
+name = "linkflare"
 
-compatibility_flags = ["nodejs_compat"]
+# (in wrangler.toml)
+# Opt into backwards-incompatible changes through September 14, 2021.
+compatibility_date = "2021-09-14"
+# Also opt into an upcoming fix to the FormData API.
+compatibility_flags = ["formdata_parser_supports_files", "nodejs_compat"]
+

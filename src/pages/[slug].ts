@@ -1,7 +1,7 @@
 import { getLinkBySlug } from '@/Shared/db'
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params }) => {  
   const { slug } = params
 
   if (!slug) {

@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@astrojs/check':
-        specifier: 0.5.10
-        version: 0.5.10(typescript@5.4.5)
+        specifier: 0.6.0
+        version: 0.6.0(typescript@5.4.5)
       '@astrojs/cloudflare':
-        specifier: ^10.2.5
+        specifier: 10.2.5
         version: 10.2.5(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))
       '@astrojs/db':
         specifier: 0.11.0
@@ -24,8 +24,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@auth/core':
-        specifier: 0.18.6
-        version: 0.18.6
+        specifier: 0.30.0
+        version: 0.30.0
       '@hookform/resolvers':
         specifier: 3.3.4
         version: 3.3.4(react-hook-form@7.51.4(react@18.3.1))
@@ -49,7 +49,7 @@ importers:
         version: 4.7.1(@types/node@20.12.10)(typescript@5.4.5)
       auth-astro:
         specifier: 4.1.1
-        version: 4.1.1(@auth/core@0.18.6)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.1.1(@auth/core@0.30.0)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       class-variance-authority:
         specifier: 0.7.0
         version: 0.7.0
@@ -90,8 +90,8 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
       zod:
-        specifier: 3.23.6
-        version: 3.23.6
+        specifier: 3.23.7
+        version: 3.23.7
       zustand:
         specifier: 4.5.2
         version: 4.5.2(@types/react@18.3.1)(react@18.3.1)
@@ -116,8 +116,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@astrojs/check@0.5.10':
-    resolution: {integrity: sha512-vliHXM9cu/viGeKiksUM4mXfO816ohWtawTl2ADPgTsd4nUMjFiyAl7xFZhF34yy4hq4qf7jvK1F2PlR3b5I5w==}
+  '@astrojs/check@0.6.0':
+    resolution: {integrity: sha512-Q6fct7FvByTf0L5lvH2QwFelXtLViWhPNgMfOvrGq7spV5SPX9jQPoFxH+nRFh1oDhBBIWImRjkSpSyhX9fQHA==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -180,11 +180,17 @@ packages:
   '@astrojs/underscore-redirects@0.3.3':
     resolution: {integrity: sha512-qDAKhFO4M1KzP7mxoJfiehf8oyf3EB158MxAa6z10NeD2pR3o4K3LlOQI8CfJgXE+BDBQcnaLvVCg/Mz/Gkg4Q==}
 
-  '@auth/core@0.18.6':
-    resolution: {integrity: sha512-AI7tnyNOg5zVS2elA44O03MWS6jyp69S8habJts63IyiCIoSkhqcZX4EcEJ0287m0hxzOltPCV9Zq2aqXbrNSA==}
+  '@auth/core@0.30.0':
+    resolution: {integrity: sha512-8AE4m/nk+4EIiVCJwxZAsJeAQuzpEC8M8768mmKVn60CGDdupKQkVhxbRlm5Qh7eNRCoFFME+0DvtaX2aXrYaA==}
     peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
       nodemailer: ^6.8.0
     peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
       nodemailer:
         optional: true
 
@@ -3567,8 +3573,8 @@ packages:
     peerDependencies:
       zod: ^3.23.3
 
-  zod@3.23.6:
-    resolution: {integrity: sha512-RTHJlZhsRbuA8Hmp/iNL7jnfc4nZishjsanDAfEY1QpDQZCahUp3xDzl+zfweE9BklxMUcgBgS1b7Lvie/ZVwA==}
+  zod@3.23.7:
+    resolution: {integrity: sha512-NBeIoqbtOiUMomACV/y+V3Qfs9+Okr18vR5c/5pHClPpufWOrsx8TENboDPe265lFdfewX2yBtNTLPvnmCxwog==}
 
   zustand@4.5.2:
     resolution: {integrity: sha512-2cN1tPkDVkwCy5ickKrI7vijSjPksFRfqS6237NzT0vqSsztTNnQdHw9mmN7uBdk3gceVXU0a+21jFzFzAc9+g==}
@@ -3597,7 +3603,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@astrojs/check@0.5.10(typescript@5.4.5)':
+  '@astrojs/check@0.6.0(typescript@5.4.5)':
     dependencies:
       '@astrojs/language-server': 2.9.0(typescript@5.4.5)
       chokidar: 3.6.0
@@ -3643,7 +3649,7 @@ snapshots:
       prompts: 2.4.2
       strip-ansi: 7.1.0
       yargs-parser: 21.1.1
-      zod: 3.23.6
+      zod: 3.23.7
     transitivePeerDependencies:
       - '@aws-sdk/client-rds-data'
       - '@cloudflare/workers-types'
@@ -3760,7 +3766,7 @@ snapshots:
 
   '@astrojs/underscore-redirects@0.3.3': {}
 
-  '@auth/core@0.18.6':
+  '@auth/core@0.30.0':
     dependencies:
       '@panva/hkdf': 1.1.1
       '@types/cookie': 0.6.0
@@ -5041,8 +5047,8 @@ snapshots:
       vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.10))
       which-pm: 2.1.1
       yargs-parser: 21.1.1
-      zod: 3.23.6
-      zod-to-json-schema: 3.23.0(zod@3.23.6)
+      zod: 3.23.7
+      zod-to-json-schema: 3.23.0(zod@3.23.7)
     optionalDependencies:
       sharp: 0.33.3
     transitivePeerDependencies:
@@ -5058,9 +5064,9 @@ snapshots:
 
   async-listen@3.0.1: {}
 
-  auth-astro@4.1.1(@auth/core@0.18.6)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  auth-astro@4.1.1(@auth/core@0.30.0)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@auth/core': 0.18.6
+      '@auth/core': 0.30.0
       astro: 4.7.1(@types/node@20.12.10)(typescript@5.4.5)
       next-auth: 4.24.7(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       set-cookie-parser: 2.6.0
@@ -6137,7 +6143,7 @@ snapshots:
       workerd: 1.20240419.0
       ws: 8.17.0
       youch: 3.3.3
-      zod: 3.23.6
+      zod: 3.23.7
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -7211,11 +7217,11 @@ snapshots:
       mustache: 4.2.0
       stacktracey: 2.1.8
 
-  zod-to-json-schema@3.23.0(zod@3.23.6):
+  zod-to-json-schema@3.23.0(zod@3.23.7):
     dependencies:
-      zod: 3.23.6
+      zod: 3.23.7
 
-  zod@3.23.6: {}
+  zod@3.23.7: {}
 
   zustand@4.5.2(@types/react@18.3.1)(react@18.3.1):
     dependencies:
