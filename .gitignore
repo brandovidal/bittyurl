@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Cloudflare
 .wrangler/
 .dev.vars
+
+# Vercel
+.vercel

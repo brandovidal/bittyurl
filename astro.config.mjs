@@ -3,8 +3,9 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import auth from 'auth-astro';
 import db from '@astrojs/db';
-import cloudflare from '@astrojs/cloudflare';
 
+// import cloudflare from '@astrojs/cloudflare';
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,13 +13,13 @@ export default defineConfig({
     applyBaseStyles: false
   }), auth(), db()],
   output: 'server',
-  adapter: cloudflare(),
-  vite: {
-    ssr: {
-      external: ['node:path', 'node:process']
-    },
-    build: {
-      minify: false
-    }
-  }
+  adapter: vercel(),
+  // vite: {
+  //   ssr: {
+  //     external: ['node:path', 'node:process']
+  //   },
+  //   build: {
+  //     minify: false
+  //   }
+  // }
 });
