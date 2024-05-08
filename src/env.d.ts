@@ -3,12 +3,12 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  readonly GOOGLE_CLIENT_ID: string;
-  readonly GOOGLE_CLIENT_SECRET: string;
-  readonly ASTRO_STUDIO_APP_TOKEN: string;
+  readonly DB_PASSWORD: string;
+  readonly PUBLIC_POKEAPI: string;
   // more env variables...
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+

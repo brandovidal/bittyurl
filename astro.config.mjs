@@ -19,10 +19,7 @@ export default defineConfig({
   adapter: cloudflare(),
   vite: {
     ssr: {
-      external: ['node:path', 'astro:db']
-    },
-    optimizeDeps: {
-      exclude: ['astro:db']
+      external: ['node:path', 'node:process']
     }
   }
 })
