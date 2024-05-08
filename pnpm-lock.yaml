@@ -24,8 +24,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@auth/core':
-        specifier: 0.30.0
-        version: 0.30.0
+        specifier: 0.18.6
+        version: 0.18.6
       '@hookform/resolvers':
         specifier: 3.3.4
         version: 3.3.4(react-hook-form@7.51.4(react@18.3.1))
@@ -49,7 +49,7 @@ importers:
         version: 4.7.1(@types/node@20.12.10)(typescript@5.4.5)
       auth-astro:
         specifier: 4.1.1
-        version: 4.1.1(@auth/core@0.30.0)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.1.1(@auth/core@0.18.6)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       class-variance-authority:
         specifier: 0.7.0
         version: 0.7.0
@@ -180,17 +180,11 @@ packages:
   '@astrojs/underscore-redirects@0.3.3':
     resolution: {integrity: sha512-qDAKhFO4M1KzP7mxoJfiehf8oyf3EB158MxAa6z10NeD2pR3o4K3LlOQI8CfJgXE+BDBQcnaLvVCg/Mz/Gkg4Q==}
 
-  '@auth/core@0.30.0':
-    resolution: {integrity: sha512-8AE4m/nk+4EIiVCJwxZAsJeAQuzpEC8M8768mmKVn60CGDdupKQkVhxbRlm5Qh7eNRCoFFME+0DvtaX2aXrYaA==}
+  '@auth/core@0.18.6':
+    resolution: {integrity: sha512-AI7tnyNOg5zVS2elA44O03MWS6jyp69S8habJts63IyiCIoSkhqcZX4EcEJ0287m0hxzOltPCV9Zq2aqXbrNSA==}
     peerDependencies:
-      '@simplewebauthn/browser': ^9.0.1
-      '@simplewebauthn/server': ^9.0.2
       nodemailer: ^6.8.0
     peerDependenciesMeta:
-      '@simplewebauthn/browser':
-        optional: true
-      '@simplewebauthn/server':
-        optional: true
       nodemailer:
         optional: true
 
@@ -3766,7 +3760,7 @@ snapshots:
 
   '@astrojs/underscore-redirects@0.3.3': {}
 
-  '@auth/core@0.30.0':
+  '@auth/core@0.18.6':
     dependencies:
       '@panva/hkdf': 1.1.1
       '@types/cookie': 0.6.0
@@ -5064,9 +5058,9 @@ snapshots:
 
   async-listen@3.0.1: {}
 
-  auth-astro@4.1.1(@auth/core@0.30.0)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  auth-astro@4.1.1(@auth/core@0.18.6)(astro@4.7.1(@types/node@20.12.10)(typescript@5.4.5))(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@auth/core': 0.30.0
+      '@auth/core': 0.18.6
       astro: 4.7.1(@types/node@20.12.10)(typescript@5.4.5)
       next-auth: 4.24.7(next@14.2.3(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       set-cookie-parser: 2.6.0
