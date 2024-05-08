@@ -8,6 +8,7 @@
     "build:v2": "astro check && export echo $(cat .env) && astro build --remote",
     "preview": "export echo $(cat .env) && astro preview --remote",
     "start": "wrangler pages dev ./dist",
+    "deploy": "fly deploy", 
     "astro": "astro"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "zustand": "4.5.2"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.7",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
     "wrangler": "3.53.1"
