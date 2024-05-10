@@ -38,6 +38,8 @@ jobs:
 
       - name: Build step
         run: "pnpm run build"
+        env:
+          ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
@@ -45,3 +47,5 @@ jobs:
           project: "nanolink"
           entrypoint: "server/entry.mjs"
           root: "dist"
+        env:
+          ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
