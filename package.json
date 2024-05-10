@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "start": "astro dev --remote",
     "build": "astro check && astro build --remote",
-    "build:v2": "astro check && export echo $(cat .env) && astro build --remote",
     "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
     "astro": "astro"
   },

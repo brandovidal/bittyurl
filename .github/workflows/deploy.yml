@@ -28,11 +28,16 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 6
+
       - name: Install step
-        run: "npm install"
+        run: "pnpm install"
 
       - name: Build step
-        run: "npm run build"
+        run: "pnpm run build"
         env:
           ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
 
