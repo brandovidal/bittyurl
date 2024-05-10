@@ -6,7 +6,8 @@ import db from '@astrojs/db';
 
 // import cloudflare from '@astrojs/cloudflare';
 // import vercel from "@astrojs/vercel/serverless";
-import node from "@astrojs/node";
+// import node from "@astrojs/node";
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,15 +15,10 @@ export default defineConfig({
     applyBaseStyles: false
   }), auth(), db()],
   output: 'server',
-  adapter: node({
-    mode: "standalone"
-  })
+  adapter: vercel()
   // vite: {
   //   ssr: {
   //     external: ['node:path', 'node:process']
-  //   },
-  //   build: {
-  //     minify: false
   //   }
   // }
 });
