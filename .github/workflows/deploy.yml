@@ -34,10 +34,6 @@ jobs:
       - name: Build step
         run: "npm run build"
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
 
       - name: Upload to Deno Deploy
@@ -47,8 +43,4 @@ jobs:
           entrypoint: "server/entry.mjs"
           root: "dist"
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
-          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           ASTRO_STUDIO_APP_TOKEN: ${{ secrets.ASTRO_STUDIO_APP_TOKEN }}
