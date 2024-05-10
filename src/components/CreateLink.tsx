@@ -18,24 +18,6 @@ import { toast } from 'sonner'
 import JSConfetti from 'js-confetti'
 import { useLinkStore } from '@/store/link'
 
-const formSchema = object({
-  url: string({
-    required_error: 'URL is required',
-    invalid_type_error: 'URL must be a string'
-  })
-    .trim()
-    .url({ message: 'Invalid URL' }),
-  slug: string({
-    required_error: 'Slug is required',
-    invalid_type_error: 'Slug must be a string'
-  })
-    .trim()
-    .min(3, 'Slug must be at least 3 characters')
-    .max(20, 'Slug must be at most 20 characters')
-})
-
-type formInput = TypeOf<typeof formSchema>
-
 const defaultValues = {
   url: '',
   slug: ''
@@ -57,6 +39,24 @@ export function CreateLink ({ user }: Props) {
       confettiNumber: 50
     })
   }
+
+  const formSchema = object({
+    url: string({
+      required_error: 'URL is required',
+      invalid_type_error: 'URL must be a string'
+    })
+      .trim()
+      .url({ message: 'Invalid URL' }),
+    slug: string({
+      required_error: 'Slug is required',
+      invalid_type_error: 'Slug must be a string'
+    })
+      .trim()
+      .min(3, 'Slug must be at least 3 characters')
+      .max(20, 'Slug must be at most 20 characters')
+  })
+
+  type formInput = TypeOf<typeof formSchema>
 
   const form = useForm<formInput>({
     resolver: zodResolver(formSchema),

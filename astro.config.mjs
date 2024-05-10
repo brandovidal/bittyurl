@@ -1,11 +1,10 @@
 import { defineConfig } from 'astro/config'
-
 import react from '@astrojs/react'
 import tailwind from '@astrojs/tailwind'
 import auth from 'auth-astro'
 import db from '@astrojs/db'
 
-import cloudflare from '@astrojs/cloudflare'
+import deno from '@deno/astro-adapter'
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,5 +17,5 @@ export default defineConfig({
     db()
   ],
   output: 'server',
-  adapter: cloudflare()
+  adapter: deno()
 })

@@ -5,7 +5,6 @@ import { Button } from '@/ui/button'
 import { useLinkStore } from '@/store/link'
 import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
 import { CheckIcon } from '@/icons/CheckIcon'
 
 export function ShorterLink () {

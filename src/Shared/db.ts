@@ -1,6 +1,5 @@
 import { Link, User, db, like } from 'astro:db'
 
-import type { LinkProps } from '@/interfaces/Link'
 import type { UserProps } from '@/interfaces/User'
 
 export async function getUserByEmail (email: string) {
