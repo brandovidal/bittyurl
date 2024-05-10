@@ -1,24 +1,21 @@
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
-import auth from 'auth-astro';
-import db from '@astrojs/db';
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
+import tailwind from '@astrojs/tailwind'
+import auth from 'auth-astro'
+import db from '@astrojs/db'
 
-// import cloudflare from '@astrojs/cloudflare';
-// import vercel from "@astrojs/vercel/serverless";
-// import node from "@astrojs/node";
-import vercel from "@astrojs/vercel/serverless";
+import deno from '@deno/astro-adapter'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind({
-    applyBaseStyles: false
-  }), auth(), db()],
+  integrations: [
+    react(),
+    tailwind({
+      applyBaseStyles: false
+    }),
+    auth(),
+    db()
+  ],
   output: 'server',
-  adapter: vercel()
-  // vite: {
-  //   ssr: {
-  //     external: ['node:path', 'node:process']
-  //   }
-  // }
-});
+  adapter: deno()
+})
