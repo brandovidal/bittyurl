@@ -84,7 +84,7 @@ export function CreateLink ({ user }: Props) {
       if (data.success) {
         form.reset()
 
-        store(inputData)
+        store({ ...inputData })
         generateConfetti()
         toast.success('Link has been created.', {
           description: 'Link has been created.'
