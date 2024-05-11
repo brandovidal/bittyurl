@@ -86,6 +86,7 @@ export function CreateLink ({ user }: Props) {
 
         store({ ...inputData })
         generateConfetti()
+
         toast.success('Link has been created.', {
           description: 'Link has been created.'
         })
