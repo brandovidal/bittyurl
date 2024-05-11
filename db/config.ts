@@ -4,7 +4,8 @@ const User = defineTable({
   columns: {
     id: column.number({ primaryKey: true }),
     name: column.text(),
-    email: column.text()
+    email: column.text(),
+    createAt: column.date({ default: new Date() }),
   }
 })
 
@@ -12,6 +13,7 @@ const Link = defineTable({
   columns: {
     url: column.text(),
     slug: column.text({ unique: true }),
+    createAt: column.date({ default: new Date() }),
     userId: column.number({
       optional: true,
       references: () => User.columns.id

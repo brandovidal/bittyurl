@@ -5,7 +5,7 @@ import type { UserProps } from "@/interfaces/User";
 
 import { UserButton } from "@/components/UserButton";
 import { CreateLink } from "@/components/CreateLink";
-import { ShorterLink } from "@/components/ShorterLink";
+import { PreviewLink } from "@/components/PreviewLink";
 
 import { getSession } from "auth-astro/server";
 
@@ -54,7 +54,7 @@ if (
     <Card>
       <CardContent className="space-y-4">
         <CreateLink user={user} client:load />
-        <ShorterLink client:load />
+        <PreviewLink client:load />
       </CardContent>
     </Card>
   </div>
