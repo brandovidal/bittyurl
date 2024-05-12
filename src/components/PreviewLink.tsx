@@ -8,20 +8,8 @@ import { Button } from '@/ui/button'
 
 import { useLinkStore } from '@/store/link'
 
-export function PreviewLink () {
-  const data = useLinkStore(state => state.data)
-
-  const [slug, setSlug] = useState('')
-  const [url, setUrl] = useState('')
+export function PreviewLink ({ url, slug }: any) {
   const [isClipboard, setIsClipboard] = useState(false)
-
-  const link = useMemo(() => {
-    if (data === null || data === undefined) return null
-
-    setSlug(`/${data.slug}`)
-    setUrl(data.url)
-    return data
-  }, [data])
 
   function onClipboard (url: string) {
     navigator.clipboard.writeText(url)
@@ -35,15 +23,15 @@ export function PreviewLink () {
     }, 3_000)
   }
 
-  if (link === null || link === undefined) return <></>
+  if (url === null || url === undefined) return <></>
 
   return (
-    <div className='flex items-center justify-between rounded-md bg-white px-4 py-3 mt-4 shadow-sm dark:bg-gray-800'>
+    <div className='flex items-center justify-between rounded-md bg-gray-800 px-4 py-3 shadow-sm dark:bg-gray-700'>
       <div className='flex flex-col items-start justify-center'>
-        <p className='text-sm font-medium text-gray-900 dark:text-gray-50'>
+        <p className='text-sm font-medium text-gray-400 dark:text-gray-400'>
           {slug}
         </p>
-        <p className='text-sm font-normal text-gray-900 dark:text-gray-50'>
+        <p className='text-sm font-normal text-gray-400 dark:text-gray-400'>
           {url}
         </p>
       </div>

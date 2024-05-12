@@ -32,9 +32,9 @@ export async function getUserByEmail (email: string) {
 
 export async function getLinkBySlug (slug: string) {
   try {
-    const linkExists = await db.select().from(Link).where(like(Link.slug, slug))
+    const links = await db.select().from(Link).where(like(Link.slug, slug))
 
-    if (linkExists.length === 0) {
+    if (links.length === 0) {
       return {
         success: true,
         data: null
@@ -43,7 +43,7 @@ export async function getLinkBySlug (slug: string) {
 
     return {
       success: true,
-      data: linkExists[0].url
+      data: links[0].url
     }
   } catch (err) {
     console.log('[ERROR] getLinkBySlug ::: ', err)
@@ -66,6 +66,34 @@ export async function createUser (user: UserProps) {
   } catch (err) {
     console.log('[ERROR] createUser ::: ', err)
     const name = (err as Error).name
+    return {
+      success: false,
+      error: { message: name }
+    }
+  }
+}
+
+export async function getLinksByUser (userId: number) {
+  try {
+    const links = await db.select().from(Link).where(like(Link.userId, `${userId}`))
+
+    console.log("🚀 ~ getLinksByUser ~ links:", links)
+    if (links.length === 0) {
+      return {
+        success: true,
+        data: null
+      }
+    }
+
+    return {
+      success: true,
+      data: links
+    }
+  } catch (err) {
+    console.log('[ERROR] getLinkBySlug ::: ', err)
+
+    const name = (err as Error).name
+
     return {
       success: false,
       error: { message: name }

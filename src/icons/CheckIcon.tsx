@@ -2,7 +2,7 @@ export function CheckIcon (props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
-      className='w-6 h-6 text-gray-800 dark:text-white'
+      className='w-6 h-6 text-gray-800 dark:text-white hover:text-gray-50 hover:dark:text-gray-300'
       aria-hidden='true'
       xmlns='http://www.w3.org/2000/svg'
       width='24'
