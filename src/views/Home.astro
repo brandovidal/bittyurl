@@ -1,19 +1,18 @@
 ---
-import { CardContent, Card } from "@/ui/card";
-
-import type { UserProps } from "@/interfaces/User";
-
-import { UserButton } from "@/components/UserButton";
-import { CreateLink } from "@/components/CreateLink";
-import { ShorterLink } from "@/components/ShorterLink";
-
 import { getSession } from "auth-astro/server";
 
-import { getUserByEmail, createUser } from "@/Shared/db";
+import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
+
+import type { UserProps } from "@/interfaces/User";
+import type { LinkProps } from "@/interfaces/Link";
+
+import { UserButton } from "@/components/UserButton";
+import { Panel } from "@/components/Panel";
 
 const session = await getSession(Astro.request);
 
 let user: UserProps | null = null;
+let links: LinkProps[] = [];
 
 // user exists?
 if (
@@ -31,31 +30,39 @@ if (
   const userExists = await getUserByEmail(session.user.email);
 
   if (userExists.success && userExists.data === null) {
-    await createUser({ name: session.user.name, email: session.user.email })
+    await createUser({ name: session.user.name, email: session.user.email });
   }
 
   user = userExists.data!;
+
+  const response = await getLinksByUser(user.id!);
+  console.log("🚀 ~ response:", response)
+
+  if (response.success && response.data) {
+    links = response.data;
+  }
 }
 ---
 
 <main
-  class="flex min-h-[100dvh] items-center justify-center bg-gray-100 px-4 dark:bg-gray-950"
+  class="flex min-h-[100dvh] items-center justify-center bg-gray-950 px-4 dark:bg-gray-950"
 >
   <div class="w-full max-w-md space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between gap-8">
       <div class="text-start">
-        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Nanolink</h1>
-        <p class="mt-2 text-gray-500 dark:text-gray-400">
+        <h1
+          class="text-3xl font-bold tracking-tight sm:text-4xl text-gray-500 dark:text-gray-400"
+        >
+          Nanolink
+        </h1>
+        <p class="mt-2 text-gray-400 dark:text-gray-400">
           Shorten your long URLs with ease.
         </p>
       </div>
       <UserButton session={session} client:load />
     </div>
-    <Card>
-      <CardContent className="space-y-4">
-        <CreateLink user={user} client:load />
-        <ShorterLink client:load />
-      </CardContent>
-    </Card>
+    <div class="text-center">
+      <Panel user={user} links={links} client:load />
+    </div>
   </div>
 </main>
