@@ -1,4 +1,6 @@
 ---
+import { Header } from "@/section/Header";
+
 interface Props {
   title: string;
 }
@@ -17,11 +19,14 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <main
-      class="flex min-h-[100dvh] items-center justify-center px-4 bg-black"
-    >
-      <slot />
-    </main>
+    <div class="flex min-h-screen w-full flex-col">
+      <Header client:only="react" />
+      <main
+        class="flex min-h-[100dvh] items-center justify-center px-4 bg-black"
+      >
+        <slot />
+      </main>
+    </div>
   </body>
 </html>
 <style is:global>
