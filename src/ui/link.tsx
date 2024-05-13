@@ -1,18 +1,19 @@
-import { forwardRef } from 'react'
+import { forwardRef, type AnchorHTMLAttributes } from 'react'
 
-import { Button, buttonVariants } from '@/ui/button'
+import { Button } from '@/ui/button'
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+import { cn } from '@/lib/utils'
 
-const Link = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, ...props }, ref) => (
-    <Button
-      className={buttonVariants({ variant: 'outline' })}
-      ref={ref}
-      {...props}
-      />
-  )
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
+
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ className, href, ...props }, ref) => {
+    return (
+      <Button variant='link'>
+        <a ref={ref} href={href} className={cn('flex', className)} {...props} />
+      </Button>
+    )
+  }
 )
 
 Link.displayName = 'Link'
