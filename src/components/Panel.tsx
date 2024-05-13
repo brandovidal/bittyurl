@@ -37,7 +37,7 @@ export function Panel ({ user, links }: Props) {
         <TabsTrigger value='links'>Shortened Links</TabsTrigger>
       </TabsList>
       <TabsContent value='shorten'>
-        <Card className='mx-auto max-w-md p-8 bg-gray-900 text-gray-100'>
+        <Card className='mx-auto max-w-md p-8 bg-background'>
           <CardContent className='space-y-4'>
             <CreateLink user={user} />
             { slug && url && <PreviewLink slug={slug} url={url} /> }
@@ -45,7 +45,7 @@ export function Panel ({ user, links }: Props) {
         </Card>
       </TabsContent>
       <TabsContent value='links'>
-        <Card className='mx-auto max-w-md p-8 bg-gray-900 text-gray-100'>
+        <Card className='mx-auto max-w-md p-8 bg-background'>
           <CardContent className='space-y-4'>
             {links.length === 0 && (
               <p className='text-gray-400'>No shortened links found.</p>

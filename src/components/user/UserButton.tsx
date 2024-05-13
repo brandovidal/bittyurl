@@ -12,7 +12,8 @@ import { UserIcon } from '@/icons/UserIcon'
 
 import type { Session } from '@auth/core/types'
 import { Link } from '@/ui/link'
-const { signIn, signOut } = await import('auth-astro/client')
+
+const { signOut } = await import('auth-astro/client')
 
 interface Props {
   session: Session | null
@@ -24,7 +25,7 @@ export function UserButton ({ session }: Props) {
   }
 
   return (
-    <div className='flex items-center gap-2'>
+    <>
       {session !== null && session.user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -56,6 +57,6 @@ export function UserButton ({ session }: Props) {
           Login
         </Link>
       )}
-    </div>
+    </>
   )
 }
