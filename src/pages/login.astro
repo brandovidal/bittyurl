@@ -1,9 +1,6 @@
 ---
-import GoogleIcon from "@/icons/GoogleIcon";
-
 import Layout from "@/layouts/Layout.astro";
 
-import { Button } from "@/ui/button";
 import {
   Card,
   CardContent,
@@ -12,11 +9,11 @@ import {
   CardTitle,
 } from "@/ui/card";
 
+import { LoginButton } from "@/components/auth/LoginButton";
+
 import { getSession } from "auth-astro/server";
 
 const session = await getSession(Astro.request);
-console.log("🚀 ~ session:", session);
-
 if (session !== null && session !== undefined) {
   return Astro.redirect("/");
 }
@@ -30,21 +27,8 @@ if (session !== null && session !== undefined) {
     </CardHeader>
     <CardContent>
       <div class="grid gap-4">
-        <Button variant="secondary" className="w-full gap-4">
-          <GoogleIcon />
-          Access with Google
-        </Button>
+        <LoginButton provider="google" client:only="react" />
       </div>
     </CardContent>
   </Card>
 </Layout>
-
-<script>
-  import { signIn } from "auth-astro/client";
-
-  const login = () => {
-    signIn("google");
-  };
-
-  document.querySelector("button")?.addEventListener("click", login);
-</script>

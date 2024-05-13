@@ -34,12 +34,14 @@ if (
   }
 
   user = userExists.data!;
+  console.log("🚀 ~ user:", user);
 
-  const response = await getLinksByUser(user.id!);
-  console.log("🚀 ~ response:", response);
+  if (user !== null) {
+    const response = await getLinksByUser(user.id!);
 
-  if (response.success && response.data) {
-    links = response.data;
+    if (response.success && response.data) {
+      links = response.data;
+    }
   }
 }
 ---
