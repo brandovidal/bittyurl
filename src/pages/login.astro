@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/ui/card";
+
+import { LoginButton } from "@/components/auth/LoginButton";
+
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+if (session !== null && session !== undefined) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout session={session} title="Bittyurl | Login">
+  <Card className="mx-auto max-w-md p-8 bg-gray-900 text-gray-100">
+    <CardHeader>
+      <CardTitle className="text-2xl">Login</CardTitle>
+      <CardDescription> Login your account with Google </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="grid gap-4">
+        <LoginButton provider="google" client:only="react" />
+      </div>
+    </CardContent>
+  </Card>
+</Layout>

@@ -11,6 +11,7 @@ import { Button } from '@/ui/button'
 import { UserIcon } from '@/icons/UserIcon'
 
 import type { Session } from '@auth/core/types'
+import { Link } from '@/ui/link'
 const { signIn, signOut } = await import('auth-astro/client')
 
 interface Props {
@@ -18,9 +19,6 @@ interface Props {
 }
 
 export function UserButton ({ session }: Props) {
-  const login = () => {
-    signIn('google')
-  }
   const logout = () => {
     signOut()
   }
@@ -53,10 +51,10 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button onClick={login}>
+        <Link href='/login' rel='noopener'>
           <UserIcon className='h-5 w-5' />
           Login
-        </Button>
+        </Link>
       )}
     </div>
   )
