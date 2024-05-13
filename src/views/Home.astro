@@ -36,7 +36,7 @@ if (
   user = userExists.data!;
 
   const response = await getLinksByUser(user.id!);
-  console.log("🚀 ~ response:", response)
+  console.log("🚀 ~ response:", response);
 
   if (response.success && response.data) {
     links = response.data;
@@ -44,25 +44,21 @@ if (
 }
 ---
 
-<main
-  class="flex min-h-[100dvh] items-center justify-center bg-gray-950 px-4 dark:bg-gray-950"
->
-  <div class="w-full max-w-md space-y-6">
-    <div class="flex items-center justify-between gap-8">
-      <div class="text-start">
-        <h1
-          class="text-3xl font-bold tracking-tight sm:text-4xl text-gray-500 dark:text-gray-400"
-        >
-          bittyurl
-        </h1>
-        <p class="mt-2 text-gray-400 dark:text-gray-400">
-          Shorten your long URLs with ease.
-        </p>
-      </div>
-      <UserButton session={session} client:load />
+<div class="w-full max-w-md space-y-6">
+  <div class="flex items-center justify-between gap-8">
+    <div class="text-start">
+      <h1
+        class="text-3xl font-bold tracking-tight sm:text-4xl text-gray-500 dark:text-gray-400"
+      >
+        bittyurl
+      </h1>
+      <p class="mt-2 text-gray-400 dark:text-gray-400">
+        Shorten your long URLs with ease.
+      </p>
     </div>
-    <div class="text-center">
-      <Panel user={user} links={links} client:load />
-    </div>
+    <UserButton session={session} client:load />
   </div>
-</main>
+  <div class="text-center">
+    <Panel user={user} links={links} client:load />
+  </div>
+</div>

@@ -54,7 +54,6 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        // <Button variant="link">Link</Button>
         <Link href='/login' rel='noopener'>
           <UserIcon className='h-5 w-5' />
           Login
