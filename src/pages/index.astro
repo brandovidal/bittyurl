@@ -6,7 +6,7 @@ import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
 import type { UserProps } from "@/interfaces/User";
 import type { LinkProps } from "@/interfaces/Link";
 
-import { UserButton } from "@/components/UserButton";
+import { UserButton } from "@/components/user/UserButton";
 import { Panel } from "@/components/Panel";
 
 import { getSession } from "auth-astro/server";
@@ -47,7 +47,7 @@ if (
 }
 ---
 
-<Layout title="Bittyurl | Home">
+<Layout session={session} title="Bittyurl | Home">
   <div class="w-full max-w-md space-y-6">
     <div class="flex items-center justify-between gap-8">
       <div class="text-start">

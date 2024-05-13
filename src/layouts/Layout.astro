@@ -1,11 +1,14 @@
 ---
+import type { Session } from "@auth/core/types";
+
 import { Header } from "@/section/Header";
 
 interface Props {
-  title: string;
+  title: string
+  session: Session | null
 }
 
-const { title } = Astro.props;
+const { title, session } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +23,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class="flex min-h-screen w-full flex-col">
-      <Header client:only="react" />
+      <Header client:load session={session} />
       <main
         class="flex min-h-[100dvh] items-center justify-center px-4 bg-black"
       >
