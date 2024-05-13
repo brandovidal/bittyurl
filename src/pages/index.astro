@@ -1,9 +1,69 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import Home from "@/views/Home.astro";
+import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
+
+import type { UserProps } from "@/interfaces/User";
+import type { LinkProps } from "@/interfaces/Link";
+
+import { UserButton } from "@/components/UserButton";
+import { Panel } from "@/components/Panel";
+
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
+
+let user: UserProps | null = null;
+let links: LinkProps[] = [];
+
+// user exists?
+if (
+  !(
+    session === null ||
+    session === undefined ||
+    session.user === null ||
+    session.user === undefined ||
+    session.user?.email === null ||
+    session.user?.email === undefined ||
+    session.user?.name === null ||
+    session.user?.name === undefined
+  )
+) {
+  const userExists = await getUserByEmail(session.user.email);
+
+  if (userExists.success && userExists.data === null) {
+    await createUser({ name: session.user.name, email: session.user.email });
+  }
+
+  user = userExists.data!;
+  console.log("🚀 ~ user:", user);
+
+  if (user !== null) {
+    const response = await getLinksByUser(user.id!);
+
+    if (response.success && response.data) {
+      links = response.data;
+    }
+  }
+}
 ---
 
 <Layout title="Bittyurl | Home">
-  <Home />
+  <div class="w-full max-w-md space-y-6">
+    <div class="flex items-center justify-between gap-8">
+      <div class="text-start">
+        <h1
+          class="text-3xl font-bold tracking-tight sm:text-4xl text-gray-500 dark:text-gray-400"
+        >
+          bittyurl
+        </h1>
+        <p class="mt-2 text-gray-400 dark:text-gray-400">
+          Shorten your long URLs with ease.
+        </p>
+      </div>
+      <UserButton session={session} client:load />
+    </div>
+    <div class="text-center">
+      <Panel user={user} links={links} client:load />
+    </div>
+  </div>
 </Layout>
