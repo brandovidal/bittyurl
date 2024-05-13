@@ -19,9 +19,6 @@ interface Props {
 }
 
 export function UserButton ({ session }: Props) {
-  const login = () => {
-    signIn('google')
-  }
   const logout = () => {
     signOut()
   }

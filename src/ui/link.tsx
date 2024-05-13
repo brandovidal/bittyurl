@@ -2,7 +2,7 @@ import { forwardRef, type AnchorHTMLAttributes } from 'react'
 
 import { Button } from '@/ui/button'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/style'
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
 

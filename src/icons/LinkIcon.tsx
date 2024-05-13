@@ -1,4 +1,6 @@
-export function LinkIcon (props: React.SVGProps<SVGSVGElement>) {
+import type { SVGProps } from 'react'
+
+export function LinkIcon (props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

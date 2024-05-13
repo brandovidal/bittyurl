@@ -18,7 +18,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <main
-      class="flex min-h-[100dvh] items-center justify-center px-4 bg-background"
+      class="flex min-h-[100dvh] items-center justify-center px-4 bg-black"
     >
       <slot />
     </main>
@@ -27,24 +27,13 @@ const { title } = Astro.props;
 <style is:global>
   @import "@/styles/globals.css";
 
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    box-sizing: border-box;
-  }
-
   html,
   body {
     font-family: system-ui, sans-serif;
+  }
+
+  html {
+    box-sizing: border-box;
   }
 
   *,

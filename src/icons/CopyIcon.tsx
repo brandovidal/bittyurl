@@ -1,4 +1,6 @@
-export function CopyIcon (props: React.SVGProps<SVGSVGElement>) {
+import type { SVGProps } from 'react'
+
+export function CopyIcon (props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
