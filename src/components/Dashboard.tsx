@@ -14,7 +14,8 @@ interface Props {
   links: LinkProps[] | []
 }
 
-export function Panel ({ user, links }: Props) {
+// TODO: move to section
+export function Dashboard ({ user, links }: Props) {
   const data = useLinkStore(state => state.data)
 
   const [slug, setSlug] = useState('')

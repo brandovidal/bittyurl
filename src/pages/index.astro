@@ -7,7 +7,7 @@ import type { UserProps } from "@/interfaces/User";
 import type { LinkProps } from "@/interfaces/Link";
 
 import { UserButton } from "@/components/user/UserButton";
-import { Panel } from "@/components/Panel";
+import { Dashboard } from "@/components/Dashboard";
 
 import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
@@ -62,7 +62,7 @@ if (
       </div>
     </div>
     <div class="text-center">
-      <Panel user={user} links={links} client:load />
+      <Dashboard user={user} links={links} client:load />
     </div>
   </div>
 </Layout>
