@@ -61,16 +61,16 @@ export function UserButton ({ session }: Props) {
               {session.user.email}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuLabel className='font-normal'>
+              <Link href='/dashboard' className='w-full'>Dashboard</Link>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>
               <a href='#'>Logout</a>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        // <Button variant='secondary' className='gap-2' onClick={gotToLogin}>
-        //   <UserIcon className='h-5 w-5' />
-        //   Join us
-        // </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant='secondary'>

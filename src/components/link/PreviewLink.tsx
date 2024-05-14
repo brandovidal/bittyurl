@@ -12,7 +12,9 @@ export function PreviewLink ({ url, slug }: any) {
   const [isClipboard, setIsClipboard] = useState(false)
 
   function onClipboard (url: string) {
-    navigator.clipboard.writeText(url)
+    const slugUrl = `${window.location.origin}/${url}`
+    navigator.clipboard.writeText(slugUrl)
+    console.log("🚀 ~ onClipboard ~ slugUrl:", slugUrl)
 
     setIsClipboard(true)
 
@@ -29,7 +31,7 @@ export function PreviewLink ({ url, slug }: any) {
     <div className='flex items-center justify-between rounded-md bg-gray-800 px-4 py-3 shadow-sm dark:bg-gray-700'>
       <div className='flex flex-col items-start justify-center'>
         <p className='text-sm font-medium text-gray-400 dark:text-gray-400'>
-          {slug}
+          /{slug}
         </p>
         <p className='text-sm font-normal text-gray-400 dark:text-gray-400'>
           {url}
