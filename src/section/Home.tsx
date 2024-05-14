@@ -4,8 +4,8 @@ import type { UserProps } from '@/interfaces/User'
 
 import { CardContent, Card } from '@/ui/card'
 
-import { CreateLink } from '@/components/CreateLink'
-import { PreviewLink } from '@/components/PreviewLink'
+import { CreateLink } from '@/components/link/CreateLink'
+import { PreviewLink } from '@/components/link/PreviewLink'
 
 import { useLinkStore } from '@/store/link'
 
