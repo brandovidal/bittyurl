@@ -22,6 +22,7 @@ import { UserIcon } from '@/icons/UserIcon'
 import type { Session } from '@auth/core/types'
 
 import { LoginButton } from '../auth/LoginButton'
+import { useUserStore } from '@/store/user'
 
 const { signOut } = await import('auth-astro/client')
 
@@ -29,14 +30,16 @@ interface Props {
   session: Session | null
 }
 
-export function UserButton ({ session }: Props) {
+export function UserButton () {
+  const user = useUserStore(state => state.data)
+
   const logout = () => {
     signOut()
   }
 
   return (
     <>
-      {session !== null && session.user ? (
+      {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -50,10 +53,10 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel className='font-medium text-md'>
-              {session.user.name}
+              {user.name}
             </DropdownMenuLabel>
             <DropdownMenuLabel className='font-normal'>
-              {session.user.email}
+              {user.email}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuLabel className='font-normal'>

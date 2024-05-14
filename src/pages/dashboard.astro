@@ -22,7 +22,7 @@ const user = await upsertUser(session);
 const links = await upsertLink(user);
 ---
 
-<Layout session={session} title="Home">
+<Layout user={user} title="Home">
   <div class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4">
     <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
       <CardHeader className="flex flex-row items-center">

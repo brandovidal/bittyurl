@@ -3,17 +3,34 @@ import { Sheet, SheetContent, SheetTrigger } from '@/ui/sheet'
 
 import { Menu } from 'lucide-react'
 
-import type { Session } from '@auth/core/types'
-
 import { UserButton } from '@/components/user/UserButton'
 import { UserMenu } from '@/components/user/UserMenu'
 import { ModeToggle } from '@/components/ModeToggle'
 
+import { useUserStore } from '@/store/user'
+import { useEffect } from 'react'
+
+import type { UserProps } from '@/interfaces/User'
+
 interface Props {
-  session: Session | null
+  user?: UserProps | null
 }
 
-export function Header ({ session }: Props) {
+export function Header ({ user }: Props) {
+  const storeUser = useUserStore(state => state.store)
+  const cleanUser = useUserStore(state => state.clean)
+
+  useEffect(() => {
+    function getData () {
+      if (user === null || user === undefined)  {
+        cleanUser()
+        return
+      }
+      storeUser(user)
+    }
+    getData()
+  }, [user])
+
   return (
     <header className='sticky top-0 flex h-16 items-center justify-center gap-4 border-b px-4 md:px-6'>
       <div className='flex items-center w-full max-w-7xl'>
@@ -39,7 +56,7 @@ export function Header ({ session }: Props) {
         </Sheet>
         <div className='flex w-full items-center justify-end  gap-4 md:ml-auto md:gap-2 lg:gap-4'>
           <ModeToggle />
-          <UserButton session={session} />
+          <UserButton />
         </div>
       </div>
     </header>

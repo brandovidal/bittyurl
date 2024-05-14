@@ -8,13 +8,10 @@ import { getSession } from "auth-astro/server";
 import { upsertUser } from "@/Shared/User";
 
 const session = await getSession(Astro.request);
-console.log("🚀 ~ session:", session);
-
 const user = await upsertUser(session);
-console.log("🚀 ~ user:", user)
 ---
 
-<Layout session={session} title="Home">
+<Layout user={user} title="Home">
   <div
     class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4 space-y-8"
   >
