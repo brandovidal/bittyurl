@@ -3,8 +3,6 @@ import { RefreshIcon } from '@/icons/RefreshIcon'
 
 import type { UserProps } from '@/interfaces/User'
 
-import { object, string } from 'zod'
-import type { TypeOf } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -15,8 +13,12 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/ui/form'
 import { Toaster } from '@/ui/sonner'
 import { toast } from 'sonner'
 
-import JSConfetti from 'js-confetti'
+import { createSlug } from '@/services/link'
+
+import { generateConfetti } from '@/lib/confetti'
+
 import { useLinkStore } from '@/store/link'
+import { createFormSchema, type createFormInput } from '@/validators/link'
 
 const defaultValues = {
   url: '',
@@ -31,60 +33,25 @@ export function CreateLink ({ user }: Props) {
   const store = useLinkStore(state => state.store)
   const clean = useLinkStore(state => state.clean)
 
-  const generateConfetti = async () => {
-    const jsConfetti = new JSConfetti()
-    await jsConfetti.addConfetti({
-      confettiColors: ['#fdd835', '#4caf50', '#2196f3', '#f44336', '#ff9800'],
-      confettiRadius: 3,
-      confettiNumber: 50
-    })
-  }
-
-  const formSchema = object({
-    url: string({
-      required_error: 'URL is required',
-      invalid_type_error: 'URL must be a string'
-    })
-      .trim()
-      .url({ message: 'Invalid URL' }),
-    slug: string({
-      required_error: 'Slug is required',
-      invalid_type_error: 'Slug must be a string'
-    })
-      .trim()
-      .min(3, 'Slug must be at least 3 characters')
-      .max(20, 'Slug must be at most 20 characters')
-  })
-
-  type formInput = TypeOf<typeof formSchema>
-
-  const form = useForm<formInput>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<createFormInput>({
+    resolver: zodResolver(createFormSchema),
     defaultValues
   })
 
-  async function onSubmit (values: formInput) {
+  async function onSubmit (values: createFormInput) {
     clean()
 
-    const inputData = { ...values, userId: user?.id }
-
+    const body = { ...values, userId: user?.id }
     const toastLoading = toast.loading('Creating link...')
 
     try {
-      const response = await fetch('/api/shorten-url', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inputData)
-      })
-      const data = await response.json()
+      const { data, response } = await createSlug(body)
       toast.dismiss(toastLoading)
 
       if (data.success) {
         form.reset()
 
-        store({ ...inputData })
+        store({ ...body })
         generateConfetti()
 
         toast.success('Link has been created.', {

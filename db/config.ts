@@ -14,6 +14,7 @@ const Link = defineTable({
     url: column.text(),
     slug: column.text({ unique: true }),
     createAt: column.date({ default: new Date() }),
+    clicks: column.number({ default: 0 }),
     userId: column.number({
       optional: true,
       references: () => User.columns.id
