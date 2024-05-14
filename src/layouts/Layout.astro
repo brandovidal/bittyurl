@@ -4,8 +4,8 @@ import type { Session } from "@auth/core/types";
 import { Header } from "@/section/Header";
 
 interface Props {
-  title: string
-  session: Session | null
+  title: string;
+  session: Session | null;
 }
 
 const { title, session } = Astro.props;
@@ -22,11 +22,9 @@ const { title, session } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div class="flex min-h-screen w-full flex-col">
+    <div class="flex min-h-screen w-full flex-col bg-white dark:bg-black">
       <Header client:load session={session} />
-      <main
-        class="flex min-h-[100dvh] items-center justify-center px-4 bg-background"
-      >
+      <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <slot />
       </main>
     </div>
@@ -51,20 +49,25 @@ const { title, session } = Astro.props;
   }
 </style>
 <script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
- 
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
 </script>
