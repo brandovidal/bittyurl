@@ -24,6 +24,10 @@ export function UserButton ({ session }: Props) {
     signOut()
   }
 
+  const gotToLogin = () => {
+    window.location.href = '/login'
+  }
+
   return (
     <>
       {session !== null && session.user ? (
@@ -52,10 +56,10 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Link href='/login' rel='noopener'>
+        <Button variant='secondary' className='gap-2' onClick={gotToLogin}>
           <UserIcon className='h-5 w-5' />
-          Login
-        </Link>
+          Join us
+        </Button>
       )}
     </>
   )

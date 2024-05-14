@@ -6,7 +6,9 @@ import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
 import type { UserProps } from "@/interfaces/User";
 import type { LinkProps } from "@/interfaces/Link";
 
-import { Home } from "@/section/Home";
+import { ShortenLinks } from "@/section/ShortenLinks";
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/card";
 
 import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
@@ -47,19 +49,25 @@ if (
 ---
 
 <Layout session={session} title="Home">
-  <div class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4 space-y-8 space-x-4">
-    <div class="flex items-center justify-between gap-8">
-      <div class="text-start">
-        <h1
-          class="text-3xl font-bold tracking-tight sm:text-4xl text-foreground capitalize"
-        >
-          bittyurl
-        </h1>
-        <p class="mt-2 text-gray-400 dark:text-gray-400">
-          Shorten your long URLs with ease, and share them with anyone.
-        </p>
-      </div>
-    </div>
-    <Home user={user} client:load />
+  <div class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4">
+    <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
+      <CardHeader className="flex flex-row items-center">
+        <div class="grid gap-2">
+          <CardTitle>Shorten Links</CardTitle>
+          <CardDescription>
+            Recent shortened links from your account.
+          </CardDescription>
+        </div>
+        <!-- <Button asChild size="sm" class="ml-auto gap-1">
+          <Link href="#">
+            View All
+            <ArrowUpRight class="h-4 w-4" />
+          </Link>
+        </Button> -->
+      </CardHeader>
+      <CardContent>
+        <ShortenLinks links={links} client:load />
+      </CardContent>
+    </Card>
   </div>
 </Layout>
