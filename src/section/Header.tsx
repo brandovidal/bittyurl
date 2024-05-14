@@ -7,6 +7,7 @@ import type { Session } from '@auth/core/types'
 
 import { UserButton } from '@/components/user/UserButton'
 import { UserMenu } from '@/components/user/UserMenu'
+import { ModeToggle } from '@/components/ModeToggle'
 
 interface Props {
   session: Session | null
@@ -32,6 +33,7 @@ export function Header ({ session }: Props) {
         </SheetContent>
       </Sheet>
       <div className='flex w-full items-center justify-end  gap-4 md:ml-auto md:gap-2 lg:gap-4'>
+        <ModeToggle />
         <UserButton session={session} />
       </div>
     </header>
