@@ -8,14 +8,18 @@ interface Props {
 }
 
 export function LoginButton ({ provider }: Props) {
+  const icon = {
+    google: <GoogleIcon />
+  }
+
   const onLogin = () => {
     signIn(provider)
   }
 
   return (
-    <Button variant='secondary' className='w-full gap-4' onClick={onLogin}>
-      <GoogleIcon />
-      Access with Google
+    <Button variant='secondary' className='flex gap-2' onClick={onLogin}>
+      {icon[provider]}
+      Sign in
     </Button>
   )
 }
