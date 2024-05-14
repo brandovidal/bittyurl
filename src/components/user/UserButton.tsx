@@ -7,11 +7,22 @@ import {
   DropdownMenuItem
 } from '@/ui/dropdown-menu'
 import { Button } from '@/ui/button'
+import { Link } from '@/ui/link'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/ui/dialog'
 
 import { UserIcon } from '@/icons/UserIcon'
 
 import type { Session } from '@auth/core/types'
-import { Link } from '@/ui/link'
+
+import { LoginButton } from '../auth/LoginButton'
+import { useUserStore } from '@/store/user'
 
 const { signOut } = await import('auth-astro/client')
 
@@ -19,18 +30,16 @@ interface Props {
   session: Session | null
 }
 
-export function UserButton ({ session }: Props) {
+export function UserButton () {
+  const user = useUserStore(state => state.data)
+
   const logout = () => {
     signOut()
   }
 
-  const gotToLogin = () => {
-    window.location.href = '/login'
-  }
-
   return (
     <>
-      {session !== null && session.user ? (
+      {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -44,10 +53,16 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel className='font-medium text-md'>
-              {session.user.name}
+              {user.name}
             </DropdownMenuLabel>
             <DropdownMenuLabel className='font-normal'>
-              {session.user.email}
+              {user.email}
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel className='font-normal'>
+              <Link href='/dashboard' className='w-full'>
+                Dashboard
+              </Link>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>
@@ -56,10 +71,25 @@ export function UserButton ({ session }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button variant='secondary' className='gap-2' onClick={gotToLogin}>
-          <UserIcon className='h-5 w-5' />
-          Join us
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant='secondary'>
+              <UserIcon className='h-5 w-5' />
+              Join us
+            </Button>
+          </DialogTrigger>
+          <DialogContent className='w-full sm:max-w-md text-foreground'>
+            <DialogHeader className='flex items-center justify-center my-4'>
+              <DialogTitle className='text-2xl capitalize'>
+                bittyurl
+              </DialogTitle>
+              <DialogDescription>Sign in with Google account</DialogDescription>
+            </DialogHeader>
+            <div className='flex items-center justify-center space-x-2 mb-4'>
+              <LoginButton provider='google' />
+            </div>
+          </DialogContent>
+        </Dialog>
       )}
     </>
   )

@@ -9,9 +9,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ className, href, ...props }, ref) => {
     return (
-      <Button variant='link'>
-        <a ref={ref} href={href} className={cn('flex', className)} {...props} />
-      </Button>
+      <a ref={ref} href={href} className={cn('flex', className)} {...props} />
     )
   }
 )

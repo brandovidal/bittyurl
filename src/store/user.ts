@@ -1,27 +1,27 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
-import type { LinkProps as Link } from '@/interfaces/Link'
+import type { UserProps as User } from '@/interfaces/User'
 
-interface LinkState {
-  data: Link[] | []
-  store: (data: Link[]) => void
+interface UserState {
+  data: User | null
+  store: (data: User) => void
   clean: () => void
 }
 
-export const useLinkStore = create(
+export const useUserStore = create(
   devtools(
-    persist<LinkState>(
+    persist<UserState>(
       set => ({
-        data: [],
+        data: null,
         store: data => {
           set(() => ({ data }))
         },
         clean: () => {
-          set({ data: [] })
+          set({ data: null })
         }
       }),
-      { name: 'link' }
+      { name: 'user' }
     )
   )
 )
