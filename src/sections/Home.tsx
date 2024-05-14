@@ -7,14 +7,14 @@ import { CardContent, Card } from '@/ui/card'
 import { CreateLink } from '@/components/link/CreateLink'
 import { PreviewLink } from '@/components/link/PreviewLink'
 
-import { useLinkStore } from '@/store/link'
+import { usePreviewLinkStore } from '@/store/preview-link'
 
 interface Props {
   user: UserProps | null
 }
 
 export function Home ({ user }: Props) {
-  const data = useLinkStore(state => state.data)
+  const data = usePreviewLinkStore(state => state.data)
 
   const [slug, setSlug] = useState('')
   const [url, setUrl] = useState('')

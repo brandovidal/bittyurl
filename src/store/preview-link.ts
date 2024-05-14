@@ -4,24 +4,24 @@ import { devtools, persist } from 'zustand/middleware'
 import type { LinkProps as Link } from '@/interfaces/Link'
 
 interface LinkState {
-  data: Link[] | []
-  store: (data: Link[]) => void
+  data: Link | null
+  store: (data: Link) => void
   clean: () => void
 }
 
-export const useLinkStore = create(
+export const usePreviewLinkStore = create(
   devtools(
     persist<LinkState>(
       set => ({
-        data: [],
+        data: null,
         store: data => {
           set(() => ({ data }))
         },
         clean: () => {
-          set({ data: [] })
+          set({ data: null })
         }
       }),
-      { name: 'link' }
+      { name: 'preview-link' }
     )
   )
 )

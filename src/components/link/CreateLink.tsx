@@ -17,7 +17,7 @@ import { createSlug } from '@/services/link'
 
 import { generateConfetti } from '@/lib/confetti'
 
-import { useLinkStore } from '@/store/link'
+import { usePreviewLinkStore } from '@/store/preview-link'
 import { createFormSchema, type createFormInput } from '@/validators/link'
 
 const defaultValues = {
@@ -30,8 +30,8 @@ interface Props {
 }
 
 export function CreateLink ({ user }: Props) {
-  const store = useLinkStore(state => state.store)
-  const clean = useLinkStore(state => state.clean)
+  const store = usePreviewLinkStore(state => state.store)
+  const clean = usePreviewLinkStore(state => state.clean)
 
   const form = useForm<createFormInput>({
     resolver: zodResolver(createFormSchema),

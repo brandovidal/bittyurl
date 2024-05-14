@@ -6,15 +6,12 @@ import { CheckIcon } from '@/icons/CheckIcon'
 
 import { Button } from '@/ui/button'
 
-import { useLinkStore } from '@/store/link'
-
 export function PreviewLink ({ url, slug }: any) {
   const [isClipboard, setIsClipboard] = useState(false)
 
   function onClipboard (url: string) {
     const slugUrl = `${window.location.origin}/${url}`
     navigator.clipboard.writeText(slugUrl)
-    console.log("🚀 ~ onClipboard ~ slugUrl:", slugUrl)
 
     setIsClipboard(true)
 

@@ -1,51 +1,25 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
-
-import type { UserProps } from "@/interfaces/User";
-import type { LinkProps } from "@/interfaces/Link";
-
 import { ShortenLinks } from "@/sections/ShortenLinks";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/ui/card";
 
 import { getSession } from "auth-astro/server";
+
+import { upsertUser } from "@/Shared/User";
+import { upsertLink } from "@/Shared/Link";
+
 const session = await getSession(Astro.request);
 
-let user: UserProps | null = null;
-let links: LinkProps[] = [];
-
-// user exists?
-if (
-  !(
-    session === null ||
-    session === undefined ||
-    session.user === null ||
-    session.user === undefined ||
-    session.user?.email === null ||
-    session.user?.email === undefined ||
-    session.user?.name === null ||
-    session.user?.name === undefined
-  )
-) {
-  const userExists = await getUserByEmail(session.user.email);
-
-  if (userExists.success && userExists.data === null) {
-    await createUser({ name: session.user.name, email: session.user.email });
-  }
-
-  user = userExists.data!;
-  console.log("🚀 ~ user:", user);
-
-  if (user !== null) {
-    const response = await getLinksByUser(user.id!);
-
-    if (response.success && response.data) {
-      links = response.data;
-    }
-  }
-}
+const user = await upsertUser(session);
+const links = await upsertLink(user);
 ---
 
 <Layout session={session} title="Home">

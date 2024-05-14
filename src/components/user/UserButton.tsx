@@ -7,21 +7,20 @@ import {
   DropdownMenuItem
 } from '@/ui/dropdown-menu'
 import { Button } from '@/ui/button'
-
-import { UserIcon } from '@/icons/UserIcon'
-
-import type { Session } from '@auth/core/types'
 import { Link } from '@/ui/link'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/ui/dialog'
+
+import { UserIcon } from '@/icons/UserIcon'
+
+import type { Session } from '@auth/core/types'
+
 import { LoginButton } from '../auth/LoginButton'
 
 const { signOut } = await import('auth-astro/client')
@@ -33,10 +32,6 @@ interface Props {
 export function UserButton ({ session }: Props) {
   const logout = () => {
     signOut()
-  }
-
-  const gotToLogin = () => {
-    window.location.href = '/login'
   }
 
   return (
@@ -62,7 +57,9 @@ export function UserButton ({ session }: Props) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuLabel className='font-normal'>
-              <Link href='/dashboard' className='w-full'>Dashboard</Link>
+              <Link href='/dashboard' className='w-full'>
+                Dashboard
+              </Link>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logout}>

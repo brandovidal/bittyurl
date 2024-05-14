@@ -1,44 +1,23 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import { getUserByEmail, createUser, getLinksByUser } from "@/Shared/db";
-
-import type { UserProps } from "@/interfaces/User";
-import type { LinkProps } from "@/interfaces/Link";
-
 import { Home } from "@/sections/Home";
 
 import { getSession } from "auth-astro/server";
+
+import { upsertUser } from "@/Shared/User";
+
 const session = await getSession(Astro.request);
-console.log("🚀 ~ session:", session)
+console.log("🚀 ~ session:", session);
 
-let user: UserProps | null = null;
-
-// user exists?
-if (
-  !(
-    session === null ||
-    session === undefined ||
-    session.user === null ||
-    session.user === undefined ||
-    session.user?.email === null ||
-    session.user?.email === undefined ||
-    session.user?.name === null ||
-    session.user?.name === undefined
-  )
-) {
-  const userExists = await getUserByEmail(session.user.email);
-
-  if (userExists.success && userExists.data === null) {
-    await createUser({ name: session.user.name, email: session.user.email });
-  }
-
-  user = userExists.data!;
-}
+const user = await upsertUser(session);
+console.log("🚀 ~ user:", user)
 ---
 
 <Layout session={session} title="Home">
-  <div class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4 space-y-8">
+  <div
+    class="w-full grid gap-4 md:gap-8 place-content-center my-12 md:my-4 space-y-8"
+  >
     <div class="flex items-center justify-between gap-8">
       <div class="text-start">
         <h1
