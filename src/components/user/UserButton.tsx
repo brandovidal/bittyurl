@@ -79,11 +79,12 @@ export function UserButton () {
             </Button>
           </DialogTrigger>
           <DialogContent className='w-full sm:max-w-md text-foreground'>
-            <DialogHeader className='flex items-center justify-center my-4'>
+            <DialogHeader className='flex items-center justify-center my-4 gap-2'>
               <DialogTitle className='text-2xl capitalize'>
                 bittyurl
               </DialogTitle>
-              <DialogDescription>Sign in with Google account</DialogDescription>
+              <DialogDescription>Sign in with Google account.</DialogDescription>
+              <DialogDescription>To access your shortened links list.</DialogDescription>
             </DialogHeader>
             <div className='flex items-center justify-center space-x-2 mb-4'>
               <LoginButton provider='google' />
