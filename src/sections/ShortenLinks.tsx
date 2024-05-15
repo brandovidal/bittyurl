@@ -1,5 +1,3 @@
-import { CardContent, Card } from '@/ui/card'
-
 import type { LinkProps } from '@/interfaces/Link'
 
 import { PreviewLink } from '@/components/link/PreviewLink'

@@ -11,6 +11,7 @@ import { useUserStore } from '@/store/user'
 import { useEffect } from 'react'
 
 import type { UserProps } from '@/interfaces/User'
+import { setLoggedIn, setLoggedOut } from '@/lib/auth'
 
 interface Props {
   user?: UserProps | null
@@ -24,9 +25,11 @@ export function Header ({ user }: Props) {
     function getData () {
       if (user === null || user === undefined)  {
         cleanUser()
+        // setLoggedOut()
         return
       }
       storeUser(user)
+      // setLoggedIn()
     }
     getData()
   }, [user])

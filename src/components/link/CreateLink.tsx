@@ -17,19 +17,20 @@ import { createSlug } from '@/services/link'
 
 import { generateConfetti } from '@/lib/confetti'
 
-import { usePreviewLinkStore } from '@/store/preview-link'
 import { createFormSchema, type createFormInput } from '@/validators/link'
+
+import { usePreviewLinkStore } from '@/store/preview-link'
+import { useUserStore } from '@/store/user'
 
 const defaultValues = {
   url: '',
   slug: ''
 }
 
-interface Props {
-  user: UserProps | null
-}
+export function CreateLink () {
+  const user = useUserStore(state => state.data)
+  console.log("🚀 ~ CreateLink ~ user:", user)
 
-export function CreateLink ({ user }: Props) {
   const store = usePreviewLinkStore(state => state.store)
   const clean = usePreviewLinkStore(state => state.clean)
 
