@@ -21,12 +21,15 @@ export function Header ({ user }: Props) {
   const cleanUser = useUserStore(state => state.clean)
 
   useEffect(() => {
+    // TODO: add is authenticated
     function getData () {
       if (user === null || user === undefined)  {
         cleanUser()
+        // setLoggedOut()
         return
       }
       storeUser(user)
+      // setLoggedIn()
     }
     getData()
   }, [user])

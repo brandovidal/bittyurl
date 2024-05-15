@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { CopyIcon } from '@/icons/CopyIcon'
@@ -25,7 +25,7 @@ export function PreviewLink ({ url, slug }: any) {
   if (url === null || url === undefined) return <></>
 
   return (
-    <div className='flex items-center justify-between rounded-md bg-gray-800 px-4 py-3 shadow-sm dark:bg-gray-700'>
+    <div className='flex items-center justify-between rounded-md px-4 py-3 shadow-sm bg-gray-100 dark:bg-gray-800'>
       <div className='flex flex-col items-start justify-center'>
         <p className='text-sm font-medium text-gray-400 dark:text-gray-400'>
           /{slug}
