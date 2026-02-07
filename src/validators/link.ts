@@ -1,17 +1,11 @@
 import { object, string } from 'zod'
-import type { TypeOf } from 'zod'
+import type { z } from 'zod'
 
 export const createFormSchema = object({
-  url: string({
-    required_error: 'URL is required',
-    invalid_type_error: 'URL must be a string'
-  })
+  url: string({ message: 'URL is required' })
     .trim()
-    .url({ message: 'Invalid URL' }),
-  slug: string({
-    required_error: 'Slug is required',
-    invalid_type_error: 'Slug must be a string'
-  })
+    .url('Invalid URL'),
+  slug: string({ message: 'Slug is required' })
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/i, 'Invalid slug')
     .trim()
     .min(3, 'Slug must be at least 3 characters')
@@ -19,4 +13,4 @@ export const createFormSchema = object({
     .transform(slug => slug.toLowerCase())
 })
 
-export type createFormInput = TypeOf<typeof createFormSchema>
+export type createFormInput = z.infer<typeof createFormSchema>
